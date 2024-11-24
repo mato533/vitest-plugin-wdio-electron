@@ -57,7 +57,14 @@ export default [
       'import/order': [
         'error',
         {
-          groups: ['builtin', 'external', ['parent', 'sibling'], 'index', 'object', 'type'],
+          groups: [
+            'builtin',
+            'external',
+            ['parent', 'sibling'],
+            'index',
+            'object',
+            'type',
+          ],
           distinctGroup: true,
           pathGroups: [
             {
@@ -79,11 +86,6 @@ export default [
     },
   },
   {
-    ignores: [
-      'node_modules/*',
-      'dist/*',
-      '**/*/.gitignore',
-      'coverage/*',
-    ],
+    ignores: ['node_modules/*', 'dist/*', '**/*/.gitignore', 'coverage/*'],
   },
 ]

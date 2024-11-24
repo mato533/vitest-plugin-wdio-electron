@@ -50,6 +50,9 @@ importers:
       rollup-plugin-delete:
         specifier: ^2.1.0
         version: 2.1.0(rollup@4.27.4)
+      rollup-plugin-dts:
+        specifier: ^6.1.1
+        version: 6.1.1(rollup@4.27.4)(typescript@5.7.2)
       rollup-plugin-node-externals:
         specifier: ^7.1.3
         version: 7.1.3(rollup@4.27.4)
@@ -62,6 +65,8 @@ importers:
       vitest:
         specifier: ^2.1.5
         version: 2.1.5(@types/node@22.9.3)
+
+  packages/vitest-plugin-electron: {}
 
 packages:
 
@@ -1492,6 +1497,13 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       rollup: '*'
+
+  rollup-plugin-dts@6.1.1:
+    resolution: {integrity: sha512-aSHRcJ6KG2IHIioYlvAOcEq6U99sVtqDDKVhnwt70rW6tsz3tv5OSjEiWcgzfsHdLyGXZ/3b/7b/+Za3Y6r1XA==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      rollup: ^3.29.4 || ^4
+      typescript: ^4.5 || ^5.0
 
   rollup-plugin-node-externals@7.1.3:
     resolution: {integrity: sha512-RM+7tJAejAoRsCf93TptTSdqUhRA8S78DleihMiu54Kac+uLkd9VIegLPhGnaW3ehZTXh56+R301mFH6j2A7vw==}
@@ -3244,6 +3256,14 @@ snapshots:
     dependencies:
       del: 5.1.0
       rollup: 4.27.4
+
+  rollup-plugin-dts@6.1.1(rollup@4.27.4)(typescript@5.7.2):
+    dependencies:
+      magic-string: 0.30.13
+      rollup: 4.27.4
+      typescript: 5.7.2
+    optionalDependencies:
+      '@babel/code-frame': 7.26.2
 
   rollup-plugin-node-externals@7.1.3(rollup@4.27.4):
     dependencies:

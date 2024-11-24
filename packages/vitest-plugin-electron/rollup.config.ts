@@ -53,9 +53,11 @@ const getPlugins = (plugins: Plugin[]): Plugin[] => {
 }
 const sourcemap = () => process.env.CI !== 'true'
 
-const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'))
+const pkg = JSON.parse(
+  readFileSync(new URL('./package.json', import.meta.url), 'utf8')
+)
 
-const external = [].concat(Object.keys(pkg.peerDependencies || {}), builtinModules)
+// const external = [].concat(Object.keys(pkg.peerDependencies || {}), builtinModules)
 
 const buildConfig = {
   input: {
@@ -64,7 +66,7 @@ const buildConfig = {
     preload: 'src/preload.ts',
     channel: 'src/channel.ts',
   },
-  external,
+  external: builtinModules,
   onwarn,
   strictDeprecations: true,
   output: [
