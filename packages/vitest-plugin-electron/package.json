@@ -3,7 +3,21 @@
   "version": "0.0.1",
   "description": "",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/es/index.js"
+      },
+      "require": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --fix",
@@ -15,6 +29,33 @@
     "build": "tsc --noEmit && rollup --config rollup.config.ts --configPlugin typescript"
   },
   "keywords": [],
-  "author": "",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mato533/vitest-plugin-electron.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mato533/vitest-plugin-electron/issues"
+  },
+  "homepage": "https://github.com/mato533/vitest-plugin-electron#readme",
+  "author": "Taiki Abe <taiki.abe@ymail.ne.jp>",
+  "license": "MIT",
+  "devDependencies": {
+    "@wdio/globals": "^9.3.1",
+    "@wdio/types": "^9.2.2",
+    "electron": "^33.2.0",
+    "vite": "^6.0.1",
+    "vitest": "^2.1.5",
+    "wdio-electron-service": "^7.3.1",
+    "webdriverio": "^9.3.1"
+  },
+  "peerDependencies": {
+    "electron": "*",
+    "vitest": ">2.0.0",
+    "wdio-electron-service": ">7.0.0",
+    "webdriverio": ">9.0.0"
+  },
+  "dependencies": {
+    "@wdio/electron-types": "^7.3.1",
+    "expect-webdriverio": "^5.0.5"
+  }
 }

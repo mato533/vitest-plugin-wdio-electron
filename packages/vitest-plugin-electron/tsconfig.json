@@ -1,10 +1,13 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "types": ["@wdio/globals/types"],
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "moduleResolution": "bundler",
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "**/*.spec.ts"],
-  "exclude": ["node_modules/**"]
+  "include": ["src/**/*.ts", "**/*.spec.ts", "rollup.config.ts"]
 }
