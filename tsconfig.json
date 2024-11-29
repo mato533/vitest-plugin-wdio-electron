@@ -4,8 +4,7 @@
     "module": "ESNext",
     "baseUrl": ".",
     "moduleResolution": "bundler",
-    "noEmit": true,
-    "types": ["vitest/globals"]
+    "noEmit": true
   },
   "exclude": ["node_modules/**"]
 }
