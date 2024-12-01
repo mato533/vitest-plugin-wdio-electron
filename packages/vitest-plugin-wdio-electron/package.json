@@ -1,5 +1,5 @@
 {
-  "name": "vitest-plugin-electron",
+  "name": "vitest-plugin-wdio-electron",
   "version": "0.0.1",
   "description": "",
   "type": "module",
@@ -31,12 +31,12 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mato533/vitest-plugin-electron.git"
+    "url": "git+https://github.com/mato533/vitest-plugin-wdio-electron.git"
   },
   "bugs": {
-    "url": "https://github.com/mato533/vitest-plugin-electron/issues"
+    "url": "https://github.com/mato533/vitest-plugin-wdio-electron/issues"
   },
-  "homepage": "https://github.com/mato533/vitest-plugin-electron#readme",
+  "homepage": "https://github.com/mato533/vitest-plugin-wdio-electron#readme",
   "author": "Taiki Abe <taiki.abe@ymail.ne.jp>",
   "license": "MIT",
   "devDependencies": {
