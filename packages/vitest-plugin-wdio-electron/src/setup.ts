@@ -1,6 +1,5 @@
-import { afterAll, beforeAll, beforeEach, expect } from 'vitest'
+import { afterAll, beforeAll, beforeEach, expect, inject } from 'vitest'
 import { matchers } from 'expect-webdriverio'
-import { inject } from 'vitest'
 
 import { initBrowser } from './electron'
 import { CONFIG_NAME } from './constants'

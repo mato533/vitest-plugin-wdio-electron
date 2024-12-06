@@ -2,7 +2,11 @@
 import 'vitest'
 import 'vitest/globals'
 
-import type { ElectronServiceOptions } from '@wdio/electron-types'
+import type {
+  BrowserExtension,
+  ElectronServiceOptions,
+} from '@wdio/electron-types'
+import type { Matchers } from 'expect-webdriverio'
 import type { Capabilities } from '@wdio/types'
 import type {
   WDIO_ELECTRON_SERVICE_OPTIONS,
@@ -18,15 +22,12 @@ export type VitestElectronOptions = {
   [GOOG_CHROME_OPTIONS]?: Capabilities.ChromeOptions
 }
 
-type WebdriverIOMatchers<T> = import('expect-webdriverio').Matchers<
-  Promise<void>,
-  T
->
+type WebdriverIOMatchers<T> = Matchers<Promise<void>, T>
 
 // Extend vitest types
 declare module 'vitest' {
   export interface TestContext {
-    browser: import('webdriverio').Browser
+    browser: import('webdriverio').Browser & BrowserExtension
   }
   export interface Assertion<T = any> extends WebdriverIOMatchers<T> {}
 
