@@ -1,2 +1,2 @@
 packages:
-  - 'packages/vitest-plugin-electron'
+  - 'packages/*'

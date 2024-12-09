@@ -1,0 +1,53 @@
+{
+  "name": "electron-app",
+  "version": "1.0.0",
+  "description": "An Electron application with Vue and TypeScript",
+  "type": "module",
+  "main": "./out/main/index.js",
+  "author": "example.com",
+  "homepage": "https://electron-vite.org",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint . --fix",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
+    "typecheck:web": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
+    "typecheck": "pnpm run typecheck:node && pnpm run typecheck:web",
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "test:e2e": "wdio run ./wdio.conf.ts",
+    "build": "pnpm run typecheck && electron-vite build",
+    "postinstall": "electron-builder install-app-deps",
+    "build:unpack": "pnpm run build && electron-builder --dir",
+    "build:win": "pnpm run build && electron-builder --win",
+    "build:mac": "pnpm run build && electron-builder --mac",
+    "build:linux": "pnpm run build && electron-builder --linux",
+    "build:test:win": "pnpm run build --mode test && electron-builder --win",
+    "build:test:mac": "pnpm run build --mode test && electron-builder --mac",
+    "build:test:linux": "pnpm run build --mode test && electron-builder --linux"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "^3.0.1",
+    "@electron-toolkit/utils": "^3.0.0",
+    "electron-typed-ipc-bridge": "^2.1.3"
+  },
+  "devDependencies": {
+    "@electron-toolkit/tsconfig": "^1.0.1",
+    "@rushstack/eslint-patch": "^1.10.4",
+    "@types/node": "^22.10.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/eslint-config-prettier": "^10.1.0",
+    "@vue/eslint-config-typescript": "^14.1.4",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "eslint": "^9.15.0",
+    "eslint-plugin-vue": "^9.31.0",
+    "prettier": "^3.4.1",
+    "tsx": "^4.19.2",
+    "vite": "^6.0.1",
+    "vitest": "^2.1.6",
+    "vitest-plugin-wdio-electron": "workspace:*",
+    "vue": "^3.5.13",
+    "vue-tsc": "^2.1.10"
+  }
+}
