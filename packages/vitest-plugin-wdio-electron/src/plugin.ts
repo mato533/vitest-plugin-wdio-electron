@@ -1,6 +1,8 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { mergeConfig } from 'vitest/config'
+
 import { CONFIG_NAME } from './constants'
 
 import type { VitestElectronOptions } from '../types'
@@ -16,16 +18,16 @@ const vitestPluginWdioElectron = (options: VitestElectronOptions): Plugin => {
     config(config) {
       const setupFile = getSetupFilePath('setup.js')
 
-      config.test.setupFiles = config.test.setupFiles
-        ? [...config.test.setupFiles, setupFile]
-        : [setupFile]
-
-      config.test.env = Object.assign(config.test.env || {}, {
-        WDIO_LOG_LEVEL: wdioLogLevel,
-      })
-
-      config.test.provide = Object.assign(config.test.provide || {}, {
-        [CONFIG_NAME]: options,
+      return mergeConfig(config, {
+        test: {
+          setupFiles: [setupFile],
+          env: {
+            WDIO_LOG_LEVEL: wdioLogLevel,
+          },
+          provide: {
+            [CONFIG_NAME]: options,
+          },
+        },
       })
     },
   }

@@ -15,14 +15,16 @@ const initBrowser = async (options: VitestElectronOptions) => {
   const opts = options[WDIO_ELECTRON_SERVICE_OPTIONS] || {}
   const launcherConfig = options.rootDir ? { rootDir: options.rootDir } : {}
 
+  const electronServiceOptions = options[WDIO_ELECTRON_SERVICE_OPTIONS] || {}
+  const chromeOptions = options[GOOG_CHROME_OPTIONS] || {}
+  const chromedriverOptions = options[WDIO_CHROMEDRIVER_OPTIONS] || {}
+
   const capabilities = {
     browserName: 'electron',
     browserVersion: options.electronVersion || '',
-    [WDIO_ELECTRON_SERVICE_OPTIONS]:
-      options[WDIO_ELECTRON_SERVICE_OPTIONS] || {},
-    [WDIO_CHROMEDRIVER_OPTIONS]: options[WDIO_CHROMEDRIVER_OPTIONS] || {},
-
-    [GOOG_CHROME_OPTIONS]: options[GOOG_CHROME_OPTIONS] || {},
+    [WDIO_ELECTRON_SERVICE_OPTIONS]: electronServiceOptions,
+    [GOOG_CHROME_OPTIONS]: chromeOptions,
+    [WDIO_CHROMEDRIVER_OPTIONS]: chromedriverOptions,
   }
 
   const launcher = new Launcher(
