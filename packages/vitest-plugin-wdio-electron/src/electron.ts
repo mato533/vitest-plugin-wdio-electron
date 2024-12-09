@@ -17,6 +17,7 @@ const initBrowser = async (options: VitestElectronOptions) => {
 
   const capabilities = {
     browserName: 'electron',
+    browserVersion: options.electronVersion || '',
     [WDIO_ELECTRON_SERVICE_OPTIONS]:
       options[WDIO_ELECTRON_SERVICE_OPTIONS] || {},
     [WDIO_CHROMEDRIVER_OPTIONS]: options[WDIO_CHROMEDRIVER_OPTIONS] || {},

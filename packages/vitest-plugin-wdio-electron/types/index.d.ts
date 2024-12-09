@@ -17,6 +17,7 @@ import type {
 export type VitestElectronOptions = {
   wdioLogLevel?: 'trace' | 'debug' | 'info' | 'warn' | 'error'
   rootDir?: string
+  electronVersion?: string
   [WDIO_ELECTRON_SERVICE_OPTIONS]?: ElectronServiceOptions
   [WDIO_CHROMEDRIVER_OPTIONS]?: WebdriverIO.ChromedriverOptions
   [GOOG_CHROME_OPTIONS]?: Capabilities.ChromeOptions
