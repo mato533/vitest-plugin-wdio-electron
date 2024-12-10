@@ -1,0 +1,134 @@
+name: Build
+run-name: 'Build: @${{ github.ref_name }}'
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+  GH_USER: 'github-actions[bot]'
+
+jobs:
+  build:
+    name: Build applications
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Setup node environments
+        uses: mato533/cicd-actions/setup-pnpm@main
+        with:
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Copy license and readme
+        run: |
+          cp README.md packages/vitest-plugin-wdio-electron/
+          cp LICENSE   packages/vitest-plugin-wdio-electron/
+
+      - name: Build
+        working-directory: packages/vitest-plugin-wdio-electron
+        run: pnpm run build
+
+      - name: Publish
+        working-directory: packages/vitest-plugin-wdio-electron
+        run: pnpm publish --provenance --no-git-checks --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # coverage:
+  #   name: Upload the coverage
+  #   needs:
+  #     - build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Setup node environments
+  #       uses: mato533/cicd-actions/setup-pnpm@main
+  #       with:
+  #         cache: 'pnpm'
+
+  #     - name: Run tests with coverage
+  #       id: test
+  #       working-directory: packages/vitest-plugin-wdio-electron
+  #       env:
+  #         TEST_RESULT: 'coverage/junit.xml'
+  #       run: |
+  #         pnpm exec vitest run --coverage \
+  #                              --coverage.reportOnFailure \
+  #                              --coverage.reporter=json-summary \
+  #                              --coverage.reporter=json \
+  #                              --coverage.reporter=clover \
+  #                              --reporter=default \
+  #                              --reporter=junit \
+  #                              --outputFile="${TEST_RESULT}"
+  #         echo "file-name=${TEST_RESULT}" >>"${GITHUB_OUTPUT}"
+  #         echo "file-name=${TEST_RESULT}"
+
+  #     - name: Upload coverage report to Codecov
+  #       uses: codecov/codecov-action@v5
+  #       with:
+  #         token: ${{ secrets.CODECOV_TOKEN }}
+  #         files: packages/vitest-plugin-wdio-electron/coverage/coverage-final.json
+  #         verbose: true
+
+  #     - name: Upload test results to Codecov
+  #       uses: codecov/test-results-action@v1
+  #       with:
+  #         token: ${{ secrets.CODECOV_TOKEN }}
+  #         file: packages/vitest-plugin-wdio-electron/${{ steps.test.outputs.file-name }}
+
+  #     - name: Upload coverage report to the code climate
+  #       uses: paambaati/codeclimate-action@v9
+  #       env:
+  #         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+  #       with:
+  #         coverageLocations: ${{ github.workspace }}/packages/vitest-plugin-wdio-electron/coverage/clover.xml:clover
+
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    permissions:
+      contents: write
+    steps:
+      - name: Setup node environments
+        uses: mato533/cicd-actions/setup-pnpm@main
+        with:
+          fetch-depth: 0
+          cache: 'pnpm'
+
+      - name: Generate changelog
+        env:
+          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm run changelog -c cliff-github.toml -l
+
+      - name: Spell Check and Fix of changelog
+        uses: crate-ci/typos@master
+        with:
+          files: ./CHANGELOG.md
+          write_changes: true
+
+      - name: Download tarball
+        id: download
+        run: |
+          APP_NAME="$(cat ./package.json |jq -r .name)"
+          APP_VERSION="$(cat ./package.json |jq -r .version)"
+          TAR_URL="$(pnpm view "${APP_NAME}@${APP_VERSION}" dist.tarball)"
+          TAR_NAME="${TAR_URL##*/}"
+          echo "URL: ${TAR_URL}"
+          curl -sS -OL "${TAR_URL}"
+          echo "file-name=${TAR_NAME}" >>"${GITHUB_OUTPUT}"
+          echo "file-name=${TAR_NAME}"
+          ls -l "${TAR_NAME}"
+
+      - name: Create Release
+        env:
+          GIT_TAG: ${{ github.ref_name }}
+          TAR_NAME: ${{ steps.download.outputs.file-name }}
+        run: gh release create "${GIT_TAG}" "${TAR_NAME}" --draft=false -t "${GIT_TAG}" -F CHANGELOG.md

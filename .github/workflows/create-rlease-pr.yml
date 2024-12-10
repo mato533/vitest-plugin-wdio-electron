@@ -1,0 +1,153 @@
+name: Bump Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version-type:
+        description: 'Select version type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+env:
+  GH_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+  GH_USER: 'github-actions[bot]'
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      VERSION_TYPE: ${{ github.event.inputs.version-type }}
+    steps:
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          owner: ${{ github.repository_owner }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+
+      - run: |
+          git config --global user.name "${GH_USER}"
+          git config --global user.email "${GH_EMAIL}"
+
+      - uses: mato533/cicd-actions/setup-pnpm@main
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        with:
+          fetch-depth: 0
+          cache: 'pnpm'
+
+      - name: Display selected version type
+        run: echo "Selected version type-> ${VERSION_TYPE}"
+
+      # You can add your own logic here based on the selected version type
+      - name: Bump version based on input
+        working-directory: packages/electron-typed-ipc-bridge
+        run: |
+          case "${VERSION_TYPE}" in
+            major)
+              echo "Bumping major version"
+              pnpm version major --no-commit-hooks --no-git-tag-version
+              ;;
+            minor)
+              echo "Bumping minor version"
+              pnpm version minor --no-commit-hooks --no-git-tag-version
+              ;;
+            patch)
+              echo "Bumping patch version"
+              pnpm version patch --no-commit-hooks --no-git-tag-version
+              ;;
+          esac
+
+      - name: Parse package.json
+        id: identify-version
+        working-directory: packages/electron-typed-ipc-bridge
+        run: |
+          APP_VERSION="$(cat ./package.json |jq -r .version)"
+          if [ ! -n "${APP_VERSION}" ]; then
+            exit 255
+          fi
+          echo "Detected the version: ${APP_VERSION}"
+          echo "app-version=${APP_VERSION}" >>"${GITHUB_OUTPUT}"
+          echo "app-version-text=v${APP_VERSION}" >>"${GITHUB_OUTPUT}"
+
+      - name: Check if there are any changes
+        run: |
+          git add -N .
+          if git diff --exit-code --quiet; then
+            echo "No changes detected."
+            echo "ERROR: could not update the package.json"
+            exit 1
+          else
+            echo "Changes detected."
+          fi
+
+      - name: Checkout new repository
+        id: create-repository
+        env:
+          APP_VERSION: ${{steps.identify-version.outputs.app-version}}
+          APP_VERSION_TEXT: ${{steps.identify-version.outputs.app-version-text}}
+        run: |
+          BRANCH_NAME="release/${APP_VERSION_TEXT}"
+          git checkout -b "${BRANCH_NAME}"
+          echo "branch-name=${BRANCH_NAME}" >>"${GITHUB_OUTPUT}"
+
+      - name: Update the changelog
+        env:
+          APP_VERSION_TEXT: ${{steps.identify-version.outputs.app-version-text}}
+        run: |
+          pnpm run changelog --tag "${APP_VERSION_TEXT}"
+
+      - name: Spell Check and Fix of changelog
+        uses: crate-ci/typos@master
+        with:
+          files: ./CHANGELOG.md
+          write_changes: true
+
+      - name: Commit the changelog
+        env:
+          APP_VERSION_TEXT: ${{steps.identify-version.outputs.app-version-text}}
+        run: |
+          git add CHANGELOG.md
+          git commit -F-<<EOF
+          chore: update the CHANGELOG.md for ${APP_VERSION_TEXT}
+
+          [AUTO] this commit is created by github actions automatically.
+          [SKIP TEST] skip test.
+          EOF
+
+      - name: Commit package.json
+        working-directory: packages/electron-typed-ipc-bridge
+        env:
+          APP_VERSION: ${{steps.identify-version.outputs.app-version}}
+          APP_VERSION_TEXT: ${{steps.identify-version.outputs.app-version-text}}
+        run: |
+          git add package.json
+          git commit -F-<<EOF
+          chore: update version of package.json for ${APP_VERSION_TEXT}
+
+          [AUTO] this commit is created by github actions automatically.
+          [SKIP TEST] skip test.
+          EOF
+
+      - name: Push commits
+        env:
+          BRANCH_NAME: ${{ steps.create-repository.outputs.branch-name }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          git push -u origin "${BRANCH_NAME}"
+
+      - name: Create pull request
+        env:
+          APP_VERSION_TEXT: ${{steps.identify-version.outputs.app-version-text}}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh pr create --title "chore(release): ${APP_VERSION_TEXT}" --body "**Preparations for ${APP_VERSION_TEXT}**"

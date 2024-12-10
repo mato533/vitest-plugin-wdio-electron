@@ -6,6 +6,7 @@
     "prepare": "husky",
     "format": "prettier --write .",
     "lint": "eslint . --fix",
+    "test:e2e": "pnpm -r --filter electron-app exec vitest --run",
     "changelog": "git-cliff -o CHANGELOG.md"
   },
   "keywords": [],
