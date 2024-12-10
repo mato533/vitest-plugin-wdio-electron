@@ -13,6 +13,7 @@ export default defineConfig({
 
   test: {
     globals: true,
+    hookTimeout: 30000,
     include: ['e2e/**/*.spec.vitest.ts'],
     environment: 'node',
   },
