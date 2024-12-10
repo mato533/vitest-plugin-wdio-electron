@@ -155,7 +155,7 @@ jobs:
           APP_VERSION_TEXT: ${{steps.identify-version.outputs.app-version-text}}
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          URL="$(gh pr create --title "chore(release): ${APP_VERSION_TEXT}" --body "**Preparations for ${APP_VERSION_TEXT}**")""
+          URL="$(gh pr create --title "chore(release): ${APP_VERSION_TEXT}" --body "**Preparations for ${APP_VERSION_TEXT}**")"
           echo ${URL}
           if [ "${IS_ENABLE_AUTO_MERGE}" = "true" ]; then
             echo "Enable auto-merge"
