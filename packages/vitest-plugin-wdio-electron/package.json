@@ -1,0 +1,66 @@
+{
+  "name": "vitest-plugin-wdio-electron",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/es/index.js"
+      },
+      "require": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint . --fix",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "changelog": "git-cliff -o CHANGELOG.md",
+    "typecheck": "tsc --noEmit -p tsconfig.json --composite false",
+    "build": "tsc --noEmit && rollup --config rollup.config.ts --configPlugin typescript"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mato533/vitest-plugin-wdio-electron.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mato533/vitest-plugin-wdio-electron/issues"
+  },
+  "homepage": "https://github.com/mato533/vitest-plugin-wdio-electron#readme",
+  "author": "Taiki Abe <taiki.abe@ymail.ne.jp>",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "@wdio/globals": "^9.3.1",
+    "@wdio/types": "^9.2.2",
+    "electron": "^33.2.0",
+    "rollup": "^4.27.4",
+    "rollup-plugin-delete": "^2.1.0",
+    "rollup-plugin-node-externals": "^7.1.3",
+    "vite": "^6.0.1",
+    "vitest": "^2.1.5",
+    "wdio-electron-service": "^7.3.1",
+    "webdriverio": "^9.3.1"
+  },
+  "peerDependencies": {
+    "electron": "*",
+    "vitest": ">2.0.0",
+    "wdio-electron-service": ">7.0.0",
+    "webdriverio": ">9.0.0"
+  },
+  "dependencies": {
+    "@wdio/electron-types": "^7.3.1",
+    "expect-webdriverio": "^5.0.5"
+  }
+}

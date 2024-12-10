@@ -6,7 +6,6 @@ import typescript from '@rollup/plugin-typescript'
 import del from 'rollup-plugin-delete'
 import json from '@rollup/plugin-json'
 import nodeExternals from 'rollup-plugin-node-externals'
-import { dts } from 'rollup-plugin-dts'
 
 import type { Plugin, WarningHandlerWithDefault } from 'rollup'
 
@@ -16,12 +15,6 @@ const onwarn: WarningHandlerWithDefault = (warning) => {
       'Please keep in mind that the browser build may never have external dependencies!'
   )
   throw Object.assign(new Error(), warning)
-}
-
-const onwarnGenDts: WarningHandlerWithDefault = (warning) => {
-  if (warning.code !== 'UNUSED_EXTERNAL_IMPORT') {
-    console.log(warning.message)
-  }
 }
 const emitModulePackageFile = (): Plugin => {
   return {
@@ -57,16 +50,18 @@ const pkg = JSON.parse(
   readFileSync(new URL('./package.json', import.meta.url), 'utf8')
 )
 
-// const external = [].concat(Object.keys(pkg.peerDependencies || {}), builtinModules)
+const external = [].concat(
+  Object.keys(pkg.peerDependencies || {}),
+  builtinModules,
+  ['@electron-forge/shared-types']
+)
 
 const buildConfig = {
   input: {
     index: 'src/index.ts',
-    main: 'src/main.ts',
-    preload: 'src/preload.ts',
-    channel: 'src/channel.ts',
+    setup: 'src/setup.ts',
   },
-  external: builtinModules,
+  external,
   onwarn,
   strictDeprecations: true,
   output: [
@@ -93,16 +88,4 @@ const buildConfig = {
   ]),
 }
 
-const dtsConfig = {
-  input: {
-    index: 'src/types/index.d.ts',
-    main: 'src/types/main.d.ts',
-    preload: 'src/types/preload.d.ts',
-  },
-  output: [{ dir: dirname(pkg.types) }],
-  external,
-  onwarn: onwarnGenDts,
-  plugins: getPlugins([dts(), nodeExternals()]),
-}
-
-export default [buildConfig, dtsConfig]
+export default [buildConfig]

@@ -86,6 +86,12 @@ export default [
     },
   },
   {
-    ignores: ['node_modules/*', 'dist/*', '**/*/.gitignore', 'coverage/*'],
+    ignores: [
+      '**/node_modules/*',
+      '**/dist/*',
+      '**/out/*',
+      '**/*/.gitignore',
+      'coverage/*',
+    ],
   },
 ]
