@@ -159,5 +159,5 @@ jobs:
           echo ${URL}
           if [ "${IS_ENABLE_AUTO_MERGE}" = "true" ]; then
             echo "Enable auto-merge"
-            gh pr merge ${${URL}} --auto
+            gh pr merge ${URL} --auto
           fi
