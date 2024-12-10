@@ -106,7 +106,7 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm run changelog -c cliff-github.toml -l
+          pnpm run changelog -l
 
       - name: Spell Check and Fix of changelog
         uses: crate-ci/typos@master
