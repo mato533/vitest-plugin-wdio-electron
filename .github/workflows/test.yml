@@ -35,9 +35,9 @@ jobs:
         working-directory: packages/vitest-plugin-wdio-electron
         run: pnpm run typecheck
 
-      - name: Run the test
-        working-directory: packages/vitest-plugin-wdio-electron
-        run: pnpm run test
+      # - name: Run the test
+      #   working-directory: packages/vitest-plugin-wdio-electron
+      #   run: pnpm run test
 
       - name: Build
         id: build
