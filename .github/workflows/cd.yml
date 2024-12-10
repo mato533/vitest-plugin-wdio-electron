@@ -59,7 +59,7 @@ jobs:
 
       - name: Parse package.json
         id: identify-version
-        working-directory: packages/electron-typed-ipc-bridge
+        working-directory: packages/vitest-plugin-wdio-electron
         run: |
           APP_VERSION="$(cat ./package.json |jq -r .version)"
           if [ ! -n "${APP_VERSION}" ]; then

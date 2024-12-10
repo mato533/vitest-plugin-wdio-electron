@@ -50,7 +50,7 @@ jobs:
 
       # You can add your own logic here based on the selected version type
       - name: Bump version based on input
-        working-directory: packages/electron-typed-ipc-bridge
+        working-directory: packages/vitest-plugin-wdio-electron
         run: |
           case "${VERSION_TYPE}" in
             major)
@@ -69,7 +69,7 @@ jobs:
 
       - name: Parse package.json
         id: identify-version
-        working-directory: packages/electron-typed-ipc-bridge
+        working-directory: packages/vitest-plugin-wdio-electron
         run: |
           APP_VERSION="$(cat ./package.json |jq -r .version)"
           if [ ! -n "${APP_VERSION}" ]; then
@@ -125,7 +125,7 @@ jobs:
           EOF
 
       - name: Commit package.json
-        working-directory: packages/electron-typed-ipc-bridge
+        working-directory: packages/vitest-plugin-wdio-electron
         env:
           APP_VERSION: ${{steps.identify-version.outputs.app-version}}
           APP_VERSION_TEXT: ${{steps.identify-version.outputs.app-version-text}}
