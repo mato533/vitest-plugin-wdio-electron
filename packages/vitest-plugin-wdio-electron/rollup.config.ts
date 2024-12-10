@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 
 import typescript from '@rollup/plugin-typescript'
 import del from 'rollup-plugin-delete'
-import json from '@rollup/plugin-json'
+// import json from '@rollup/plugin-json'
 import nodeExternals from 'rollup-plugin-node-externals'
 
 import type { Plugin, WarningHandlerWithDefault } from 'rollup'
@@ -83,7 +83,6 @@ const buildConfig = {
     typescript({
       sourceMap: sourcemap(),
     }),
-    json(),
     nodeExternals(),
   ]),
 }
