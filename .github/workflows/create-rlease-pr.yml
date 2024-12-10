@@ -12,6 +12,10 @@ on:
           - major
           - minor
           - patch
+      enable-auto-merge:
+        description: 'Enable Auto-merge'
+        default: false
+        type: boolean
 
 env:
   GH_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
@@ -26,6 +30,7 @@ jobs:
       pull-requests: write
     env:
       VERSION_TYPE: ${{ github.event.inputs.version-type }}
+      IS_ENABLE_AUTO_MERGE: ${{ github.event.inputs.enable-auto-merge }}
     steps:
       - uses: actions/create-github-app-token@v1
         id: app-token
@@ -150,4 +155,9 @@ jobs:
           APP_VERSION_TEXT: ${{steps.identify-version.outputs.app-version-text}}
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          gh pr create --title "chore(release): ${APP_VERSION_TEXT}" --body "**Preparations for ${APP_VERSION_TEXT}**"
+          URL="$(gh pr create --title "chore(release): ${APP_VERSION_TEXT}" --body "**Preparations for ${APP_VERSION_TEXT}**")""
+          echo ${URL}
+          if [ "${IS_ENABLE_AUTO_MERGE}" = "true" ]; then
+            echo "Enable auto-merge"
+            gh pr merge ${${URL}} --auto
+          fi
