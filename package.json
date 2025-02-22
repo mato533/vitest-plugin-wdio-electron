@@ -22,20 +22,20 @@
   "packageManager": "pnpm@9.15.5",
   "license": "MIT",
   "devDependencies": {
-    "@eslint/js": "^9.20.0",
+    "@eslint/js": "^9.21.0",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.13.1",
-    "eslint": "^9.20.0",
+    "@types/node": "^22.13.5",
+    "eslint": "^9.21.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-unicorn": "^56.0.1",
     "git-cliff": "^2.8.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.2",
     "typescript": "~5.7.3",
-    "typescript-eslint": "^8.23.0"
+    "typescript-eslint": "^8.24.1"
   },
   "lint-staged": {
     "**/*.{yml,json,md,ts,js}": [
