@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/mato533/vitest-plugin-wdio-electron#readme",
   "author": "Taiki Abe <taiki.abe@ymail.ne.jp>",
-  "packageManager": "pnpm@9.15.5",
+  "packageManager": "pnpm@10.5.0",
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.21.0",
