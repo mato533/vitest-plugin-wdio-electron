@@ -88,8 +88,8 @@ importers:
         specifier: ^25.1.8
         version: 25.1.8(electron-builder-squirrel-windows@25.1.8)
       electron-vite:
-        specifier: ^2.3.0
-        version: 2.3.0(vite@6.1.1(@types/node@22.13.5)(tsx@4.19.3)(yaml@2.7.0))
+        specifier: ^3.0.0
+        version: 3.0.0(vite@6.1.1(@types/node@22.13.5)(tsx@4.19.3)(yaml@2.7.0))
       eslint:
         specifier: ^9.21.0
         version: 9.21.0
@@ -2065,13 +2065,13 @@ packages:
     peerDependencies:
       electron: ^32.0.0 || ^33.0.0
 
-  electron-vite@2.3.0:
-    resolution: {integrity: sha512-lsN2FymgJlp4k6MrcsphGqZQ9fKRdJKasoaiwIrAewN1tapYI/KINLdfEL7n10LuF0pPSNf/IqjzZbB5VINctg==}
+  electron-vite@3.0.0:
+    resolution: {integrity: sha512-Uf8NpF4OB2Juo1Vq8pobkLVp9BZTO70VwkW7fKXSCkod0SRkc7Dkw7ddR6b1fbsgT7lcZ0HD29WRxsCcbkHXUw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
       '@swc/core': ^1.0.0
-      vite: ^4.0.0 || ^5.0.0
+      vite: ^4.0.0 || ^5.0.0 || ^6.0.0
     peerDependenciesMeta:
       '@swc/core':
         optional: true
@@ -6660,13 +6660,13 @@ snapshots:
     dependencies:
       electron: 34.2.0
 
-  electron-vite@2.3.0(vite@6.1.1(@types/node@22.13.5)(tsx@4.19.3)(yaml@2.7.0)):
+  electron-vite@3.0.0(vite@6.1.1(@types/node@22.13.5)(tsx@4.19.3)(yaml@2.7.0)):
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-arrow-functions': 7.25.9(@babel/core@7.26.0)
       cac: 6.7.14
-      esbuild: 0.21.5
-      magic-string: 0.30.14
+      esbuild: 0.24.2
+      magic-string: 0.30.17
       picocolors: 1.1.1
       vite: 6.1.1(@types/node@22.13.5)(tsx@4.19.3)(yaml@2.7.0)
     transitivePeerDependencies:
