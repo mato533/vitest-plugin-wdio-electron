@@ -42,16 +42,16 @@
   "devDependencies": {
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-typescript": "^12.1.2",
-    "@wdio/globals": "^9.9.3",
-    "@wdio/types": "^9.9.0",
-    "electron": "^34.2.0",
-    "rollup": "^4.34.8",
+    "@wdio/globals": "^9.10.1",
+    "@wdio/types": "^9.10.1",
+    "electron": "^34.3.0",
+    "rollup": "^4.34.9",
     "rollup-plugin-delete": "^2.2.0",
     "rollup-plugin-node-externals": "^8.0.0",
-    "vite": "^6.1.1",
+    "vite": "^6.2.0",
     "vitest": "^3.0.7",
     "wdio-electron-service": "^7.3.1",
-    "webdriverio": "^9.9.3"
+    "webdriverio": "^9.10.1"
   },
   "peerDependencies": {
     "electron": "*",
