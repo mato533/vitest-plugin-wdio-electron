@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/mato533/vitest-plugin-wdio-electron#readme",
   "author": "Taiki Abe <taiki.abe@ymail.ne.jp>",
-  "packageManager": "pnpm@10.6.1",
+  "packageManager": "pnpm@10.6.3",
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.22.0",
@@ -32,10 +32,10 @@
     "eslint-plugin-unicorn": "^57.0.0",
     "git-cliff": "^2.8.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.4.3",
+    "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
     "typescript": "~5.8.2",
-    "typescript-eslint": "^8.26.0"
+    "typescript-eslint": "^8.26.1"
   },
   "lint-staged": {
     "**/*.{yml,json,md,ts,js}": [
