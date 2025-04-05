@@ -32,7 +32,7 @@ jobs:
       VERSION_TYPE: ${{ github.event.inputs.version-type }}
       IS_ENABLE_AUTO_MERGE: ${{ github.event.inputs.enable-auto-merge }}
     steps:
-      - uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@v2
         id: app-token
         with:
           app-id: ${{ vars.APP_ID }}
