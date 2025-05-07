@@ -55,13 +55,13 @@ importers:
     dependencies:
       '@electron-toolkit/preload':
         specifier: ^3.0.2
-        version: 3.0.2(electron@34.5.4)
+        version: 3.0.2(electron@36.2.0)
       '@electron-toolkit/utils':
         specifier: ^4.0.0
-        version: 4.0.0(electron@34.5.4)
+        version: 4.0.0(electron@36.2.0)
       electron-typed-ipc-bridge:
         specifier: ^2.1.3
-        version: 2.1.3(electron@34.5.4)
+        version: 2.1.3(electron@36.2.0)
     devDependencies:
       '@electron-toolkit/tsconfig':
         specifier: ^1.0.1
@@ -82,8 +82,8 @@ importers:
         specifier: ^14.5.0
         version: 14.5.0(eslint-plugin-vue@9.33.0(eslint@9.26.0))(eslint@9.26.0)(typescript@5.8.3)
       electron:
-        specifier: ^34.5.4
-        version: 34.5.4
+        specifier: ^36.2.0
+        version: 36.2.0
       electron-builder:
         specifier: ^26.0.12
         version: 26.0.12(electron-builder-squirrel-windows@25.1.8)
@@ -119,7 +119,7 @@ importers:
         version: 2.2.10(typescript@5.8.3)
       wdio-electron-service:
         specifier: ^7.3.3
-        version: 7.3.3(electron@34.5.4)(webdriverio@9.12.0)
+        version: 7.3.3(electron@36.2.0)(webdriverio@9.12.0)
 
   packages/vitest-plugin-wdio-electron:
     dependencies:
@@ -143,8 +143,8 @@ importers:
         specifier: ^9.12.6
         version: 9.12.6
       electron:
-        specifier: ^34.5.4
-        version: 34.5.4
+        specifier: ^36.2.0
+        version: 36.2.0
       rollup:
         specifier: ^4.40.1
         version: 4.40.1
@@ -162,7 +162,7 @@ importers:
         version: 3.1.2(@types/debug@4.1.12)(@types/node@22.15.3)(tsx@4.19.4)(yaml@2.7.0)
       wdio-electron-service:
         specifier: ^7.3.3
-        version: 7.3.3(electron@34.5.4)(webdriverio@9.12.7)
+        version: 7.3.3(electron@36.2.0)(webdriverio@9.12.7)
       webdriverio:
         specifier: ^9.12.7
         version: 9.12.7
@@ -1895,8 +1895,8 @@ packages:
       '@swc/core':
         optional: true
 
-  electron@34.5.4:
-    resolution: {integrity: sha512-WXc3ElYW/1LH50CnpigSeRsK1AfFB/J8hCySFnhXDmz6BBAKhXlJ6bgw1k9ZldR5i+8JqX323773Jn8X3/Wagw==}
+  electron@36.2.0:
+    resolution: {integrity: sha512-5yldoRjBKxPQfI0QMX+qq750o3Nl8N1SZnJqOPMq0gZ6rIJ+7y4ZLp808GrFwjfTm05TYgq3GSD8FGuKQZqwEw==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -4702,17 +4702,17 @@ snapshots:
       ajv: 6.12.6
       ajv-keywords: 3.5.2(ajv@6.12.6)
 
-  '@electron-toolkit/preload@3.0.2(electron@34.5.4)':
+  '@electron-toolkit/preload@3.0.2(electron@36.2.0)':
     dependencies:
-      electron: 34.5.4
+      electron: 36.2.0
 
   '@electron-toolkit/tsconfig@1.0.1(@types/node@22.15.3)':
     dependencies:
       '@types/node': 22.15.3
 
-  '@electron-toolkit/utils@4.0.0(electron@34.5.4)':
+  '@electron-toolkit/utils@4.0.0(electron@36.2.0)':
     dependencies:
-      electron: 34.5.4
+      electron: 36.2.0
 
   '@electron/asar@3.2.17':
     dependencies:
@@ -6737,9 +6737,9 @@ snapshots:
 
   electron-to-chromium@1.5.119: {}
 
-  electron-typed-ipc-bridge@2.1.3(electron@34.5.4):
+  electron-typed-ipc-bridge@2.1.3(electron@36.2.0):
     dependencies:
-      electron: 34.5.4
+      electron: 36.2.0
 
   electron-vite@3.1.0(vite@6.3.4(@types/node@22.15.3)(tsx@4.19.4)(yaml@2.7.0)):
     dependencies:
@@ -6753,10 +6753,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@34.5.4:
+  electron@36.2.0:
     dependencies:
       '@electron/get': 2.0.3
-      '@types/node': 20.17.9
+      '@types/node': 22.15.3
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
@@ -9568,7 +9568,7 @@ snapshots:
     dependencies:
       defaults: 1.0.4
 
-  wdio-electron-service@7.3.3(electron@34.5.4)(webdriverio@9.12.0):
+  wdio-electron-service@7.3.3(electron@36.2.0)(webdriverio@9.12.0):
     dependencies:
       '@vitest/spy': 3.0.8
       '@wdio/electron-types': 7.3.3
@@ -9583,14 +9583,14 @@ snapshots:
       tinyspy: 3.0.2
       webdriverio: 9.12.0
     optionalDependencies:
-      electron: 34.5.4
+      electron: 36.2.0
     transitivePeerDependencies:
       - bufferutil
       - puppeteer-core
       - supports-color
       - utf-8-validate
 
-  wdio-electron-service@7.3.3(electron@34.5.4)(webdriverio@9.12.7):
+  wdio-electron-service@7.3.3(electron@36.2.0)(webdriverio@9.12.7):
     dependencies:
       '@vitest/spy': 3.0.8
       '@wdio/electron-types': 7.3.3
@@ -9605,7 +9605,7 @@ snapshots:
       tinyspy: 3.0.2
       webdriverio: 9.12.7
     optionalDependencies:
-      electron: 34.5.4
+      electron: 36.2.0
     transitivePeerDependencies:
       - bufferutil
       - puppeteer-core
