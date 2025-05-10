@@ -124,8 +124,8 @@ importers:
   packages/vitest-plugin-wdio-electron:
     dependencies:
       '@wdio/electron-types':
-        specifier: ^7.3.3
-        version: 7.3.3
+        specifier: ^8.1.0
+        version: 8.1.0
       expect-webdriverio:
         specifier: ^5.1.0
         version: 5.1.0(@wdio/globals@9.12.7(@wdio/logger@9.4.4))(@wdio/logger@9.4.4)(webdriverio@9.12.7)
@@ -1091,6 +1091,9 @@ packages:
 
   '@wdio/electron-types@7.3.3':
     resolution: {integrity: sha512-TksxUYm4TAVxJRU8Y/EWPe15lix5WwQUdKtscXR96zpgFmdFWjcF9KVc0dWoxy1XZ5IlKZ2rUcXl6GRRzR4LZw==}
+
+  '@wdio/electron-types@8.1.0':
+    resolution: {integrity: sha512-C+UwGKRR1iezazsn8iKLOmko/gNYUlS/1Dig2JNNqzh6fB85ITaSW/g+XNeBFshekqsZhf8JByQvg/eBZ3z2Bg==}
 
   '@wdio/electron-utils@7.3.3':
     resolution: {integrity: sha512-5F1xDlt/fcrAQrlmhTPsYaRR0TmI+xZ9coM4qNHmG1dAa6ueW7CFzTj4eKxHZJ3x2bRSVt+DVVXljDQHLVDEqA==}
@@ -5670,6 +5673,10 @@ snapshots:
   '@wdio/electron-types@7.3.3':
     dependencies:
       '@vitest/spy': 3.0.8
+
+  '@wdio/electron-types@8.1.0':
+    dependencies:
+      '@vitest/spy': 3.0.9
 
   '@wdio/electron-utils@7.3.3':
     dependencies:
