@@ -44,7 +44,7 @@
     "@rollup/plugin-typescript": "^12.1.2",
     "@wdio/globals": "^9.15.0",
     "@wdio/types": "^9.15.0",
-    "electron": "^34.5.8",
+    "electron": "^36.4.0",
     "rollup": "^4.41.1",
     "rollup-plugin-delete": "^3.0.1",
     "rollup-plugin-node-externals": "^8.0.0",
