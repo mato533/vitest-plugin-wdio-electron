@@ -60,7 +60,7 @@
     "webdriverio": ">9.0.0"
   },
   "dependencies": {
-    "@wdio/electron-types": "^7.3.3",
+    "@wdio/electron-types": "^8.1.0",
     "expect-webdriverio": "^5.3.0"
   }
 }
